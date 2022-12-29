@@ -15,21 +15,18 @@ import lombok.Setter;
 @Entity
 public class Persona implements Serializable {
 
-        public Persona(Long id, String nombre, String apellido, String puesto, String acercaDe, String img) {
+        public Persona(Long id, String nombre, String apellido, String puesto, String acercaDe) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.puesto = puesto;
         this.acercaDe = acercaDe;
-        this.img = img;
-        
+                
     }
 
     public Persona() {
     }
-    
-    
-    
+         
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -45,10 +42,6 @@ public class Persona implements Serializable {
     private String puesto;
     
     @Basic
-    private String acercaDe;
-    
-    @Basic
-    private String img;
-    
+    private String acercaDe; 
     
 }

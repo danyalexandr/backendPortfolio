@@ -25,14 +25,14 @@ public class TecnologiasController {
     
     @Autowired TecnologiasService tecnologiasservice;
     
-    @GetMapping("/listatecno")
+    @GetMapping("/lista")
     public ResponseEntity<List<Tecnologias>> List(){
         
         List<Tecnologias> list = tecnologiasservice.List();
         return new ResponseEntity(list, HttpStatus.OK);
     }
     
-    @GetMapping("/detailtecno/{id}")
+    @GetMapping("/detail/{id}")
     public ResponseEntity<Tecnologias> getById(@PathVariable("id") int id){
         if(!tecnologiasservice.existsById(id))
             return new ResponseEntity(new Mensaje("no existe"), HttpStatus.NOT_FOUND);
@@ -40,7 +40,7 @@ public class TecnologiasController {
         return new ResponseEntity(tecnologias, HttpStatus.OK);
     }
     
-    @PostMapping("/creartecno")
+    @PostMapping("/crear")
     public ResponseEntity<?> create(@RequestBody dtoTecnologias dtotecno){
         if(StringUtils.isBlank(dtotecno.getHabilidad())){
             return new ResponseEntity(new Mensaje("obligatorio"),HttpStatus.BAD_REQUEST);
@@ -53,7 +53,7 @@ public class TecnologiasController {
         return new ResponseEntity(new Mensaje("agregado"),HttpStatus.OK);
     }
     
-    @PutMapping("/updatetecno/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<?> update(@PathVariable("id") int id, @RequestBody dtoTecnologias dtotecno){
         
         if(!tecnologiasservice.existsById(id))
@@ -73,7 +73,7 @@ public class TecnologiasController {
         return new ResponseEntity(new Mensaje("actualizado"), HttpStatus.OK);
         }
     
-    @DeleteMapping("/borrartecno/{id}")
+    @DeleteMapping("/borrar/{id}")
         public ResponseEntity<?> delete(@PathVariable("id") int id){
             
            if(!tecnologiasservice.existsById(id))

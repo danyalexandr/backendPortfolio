@@ -11,45 +11,47 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/persona")
 @CrossOrigin(origins = "http://localhost:4200")
 public class PersonaController {
     @Autowired IPersonaService ipersonaservice;
     
-    @GetMapping("/persona/traer")
+    @GetMapping("/traer")
     public List<Persona> getPersona(){
         return ipersonaservice.getPersona();
     }
     
-    @PostMapping("/persona/crear")
+    @PostMapping("/crear")
     public String createPresona(@RequestBody Persona persona){
         ipersonaservice.savePersona(persona);
         return "la persona fue creada";
     }
-    @DeleteMapping("/persona/borrar/{id}")
+    @DeleteMapping("/borrar/{id}")
     public String deletePersona(@PathVariable Long id){
         ipersonaservice.deletePersona(id);
         return "la persona se borro ok";
     }
-    @PutMapping("/persona/editar/{id}")
+    @PutMapping("/editar/{id}")
     public Persona editPersona(@PathVariable Long id,
                                @RequestParam("nombre") String nuevoNombre,
                                @RequestParam("apellido") String nuevoApellido,
                                @RequestParam("puesto") String nuevoPuesto,
-                               @RequestParam("acercaDe") String nuevoAcercDe,
-                               @RequestParam("img") String nuevoImg){
+                               @RequestParam("acercaDe") String nuevoAcercDe){
      
         Persona persona = ipersonaservice.findPersona(id);
         persona.setNombre(nuevoNombre);
         persona.setApellido(nuevoApellido);
-        persona.setImg(nuevoImg);
+        persona.setPuesto(nuevoPuesto);
+        persona.setAcercaDe(nuevoAcercDe);
         ipersonaservice.savePersona(persona);
         return persona;
     }
-    @GetMapping("/persona/traer/perfil")
+    @GetMapping("/traer/perfil")
     public Persona findPersona(){
         return ipersonaservice.findPersona((long)1);
     }

@@ -14,16 +14,22 @@ public class Experiencia implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     
-    private String nombreE;
-    private String descripcionE;
+    private String puesto;
+    private String empresa;
+    private String fechaInicio;
+    private String fechaFin;
+    private String lugar;
 
 
     public Experiencia() {
     }
 
-    public Experiencia(String nombreE, String descripcionE) {
-        this.nombreE = nombreE;
-        this.descripcionE = descripcionE;
+    public Experiencia(String puesto, String empresa, String fechaInicio, String fechaFin, String lugar) {
+        this.puesto = puesto;
+        this.empresa = empresa;
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
+        this.lugar = lugar;
     }
 
     public int getId() {
@@ -34,23 +40,44 @@ public class Experiencia implements Serializable {
         this.id = id;
     }
 
-    public String getNombreE() {
-        return nombreE;
+    public String getPuesto() {
+        return puesto;
     }
 
-    public void setNombreE(String nombreE) {
-        this.nombreE = nombreE;
+    public void setPuesto(String puesto) {
+        this.puesto = puesto;
     }
 
-    public String getDescripcionE() {
-        return descripcionE;
+    public String getEmpresa() {
+        return empresa;
     }
 
-    public void setDescripcionE(String descripcionE) {
-        this.descripcionE = descripcionE;
+    public void setEmpresa(String empresa) {
+        this.empresa = empresa;
     }
 
-    
-    
-    
-}
+    public String getFechaInicio() {
+        return fechaInicio;
+    }
+
+    public void setFechaInicio(String fechaInicio) {
+        this.fechaInicio = fechaInicio;
+    }
+
+    public String getFechaFin() {
+        return fechaFin;
+    }
+
+    public void setFechaFin(String fechaFin) {
+        this.fechaFin = fechaFin;
+    }
+
+    public String getLugar() {
+        return lugar;
+    }
+
+    public void setLugar(String lugar) {
+        this.lugar = lugar;
+    }
+
+    }
