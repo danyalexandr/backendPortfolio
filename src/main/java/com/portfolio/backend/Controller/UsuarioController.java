@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("user")
-@CrossOrigin()
+@RequestMapping("/user")
+@CrossOrigin("https://portfoliofrontend-danyalexandr.firebaseapp.com")
 public class UsuarioController{
     
     @Autowired UsuarioService usuarioservice;
