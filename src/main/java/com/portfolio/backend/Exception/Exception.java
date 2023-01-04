@@ -1,4 +1,4 @@
-package com.portfolio.Exception;
+package com.portfolio.backend.Exception;
 
 public class Exception extends RuntimeException{
     
