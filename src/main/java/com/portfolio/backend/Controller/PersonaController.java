@@ -17,11 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/persona")
-@CrossOrigin(origins = "https://portfoliofrontend-danyalexandr.web.app/home")
+@CrossOrigin(origins = "https://portfoliofrontend-danyalexandr.web.app")
 public class PersonaController {
     @Autowired IPersonaService ipersonaservice;
     
-    @GetMapping("/traer")
+    @GetMapping("/lista")
     public List<Persona> getPersona(){
         return ipersonaservice.getPersona();
     }
@@ -36,7 +36,7 @@ public class PersonaController {
         ipersonaservice.deletePersona(id);
         return "la persona se borro ok";
     }
-    @PutMapping("/editar/{id}")
+    @PutMapping("/update/{id}")
     public Persona editPersona(@PathVariable Long id,
                                @RequestParam("nombre") String nuevoNombre,
                                @RequestParam("apellido") String nuevoApellido,
@@ -51,8 +51,9 @@ public class PersonaController {
         ipersonaservice.savePersona(persona);
         return persona;
     }
-    @GetMapping("/traer/perfil")
+    /*
+    @GetMapping("/traer/{id}")
     public Persona findPersona(){
         return ipersonaservice.findPersona((long)1);
-    }
+    }*/
 }
