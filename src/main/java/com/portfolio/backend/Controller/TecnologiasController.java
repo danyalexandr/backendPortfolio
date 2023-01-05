@@ -67,7 +67,7 @@ public class TecnologiasController {
         
         Tecnologias tecnologias = tecnologiasservice.getOne(id).get();
         tecnologias.setHabilidad(dtotecno.getHabilidad());
-        tecnologias.setPorcentaje(dtotecno.getPorcentaje());      
+        tecnologias.setPorcentaje(dtotecno.getPorcentaje());
         
         tecnologiasservice.save(tecnologias);
         return new ResponseEntity(new Mensaje("actualizado"), HttpStatus.OK);

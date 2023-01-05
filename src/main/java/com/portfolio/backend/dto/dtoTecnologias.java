@@ -8,15 +8,17 @@ public class dtoTecnologias {
      @NotBlank
     private String habilidad;
     @NotBlank
-    private int porcentaje;
+    private String porcentaje;
 
     public dtoTecnologias() {
     }
 
-    public dtoTecnologias(String habilidad, int porcentaje) {
+    public dtoTecnologias(String habilidad, String porcentaje) {
         this.habilidad = habilidad;
         this.porcentaje = porcentaje;
     }
+
+    
 
     public String getHabilidad() {
         return habilidad;
@@ -26,12 +28,12 @@ public class dtoTecnologias {
         this.habilidad = habilidad;
     }
 
-    public int getPorcentaje() {
+    public String getPorcentaje() {
         return porcentaje;
     }
 
-    public void setPorcentaje(int porcentaje) {
-        this.porcentaje = porcentaje;
+    public void setPorcentaje(String porcentaje) {
+        this.porcentaje = this.porcentaje;
     }
 
     
