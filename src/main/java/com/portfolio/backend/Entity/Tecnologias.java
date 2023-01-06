@@ -16,12 +16,12 @@ public class Tecnologias implements Serializable {
     
     @Basic
     private String habilidad;
-    private String porcentaje;
+    private int porcentaje;
 
     public Tecnologias() {
     }
 
-    public Tecnologias(String habilidad, String porcentaje) {
+    public Tecnologias(String habilidad, int porcentaje) {
         
         this.habilidad = habilidad;
         this.porcentaje = porcentaje;
@@ -43,11 +43,11 @@ public class Tecnologias implements Serializable {
         this.habilidad = habilidad;
     }
 
-    public String getPorcentaje() {
+    public int getPorcentaje() {
         return porcentaje;
     }
 
-    public void setPorcentaje(String porcentaje) {
+    public void setPorcentaje(int porcentaje) {
         this.porcentaje = porcentaje;
     }
     
