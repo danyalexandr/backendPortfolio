@@ -5,7 +5,7 @@ import javax.validation.constraints.NotBlank;
 
 public class dtoTecnologias {
     
-     @NotBlank
+    @NotBlank
     private String habilidad;
     @NotBlank
     private int porcentaje;
@@ -33,8 +33,7 @@ public class dtoTecnologias {
     }
 
     public void setPorcentaje(int porcentaje) {
-        this.porcentaje = this.porcentaje;
+        this.porcentaje = porcentaje;
     }
-
     
 }
