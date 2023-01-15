@@ -7,8 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
-import lombok.Getter;
-import lombok.Setter;
+
 
 @Entity
 public class Persona implements Serializable {
@@ -28,17 +27,21 @@ public class Persona implements Serializable {
     private String puesto;
     
     @Basic
-    private String acercaDe;   
+    private String acercaDe; 
+    
+    @Basic
+    private String img;
     
     public Persona() {
     }
      
        
-    public Persona(String nombre, String apellido, String puesto, String acercaDe) {
+    public Persona(String nombre, String apellido, String puesto, String acercaDe, String img) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.puesto = puesto;
-        this.acercaDe = acercaDe;           
+        this.acercaDe = acercaDe; 
+        this.img = img;
     }
 
     public int getId() {
@@ -79,6 +82,14 @@ public class Persona implements Serializable {
 
     public void setAcercaDe(String acercaDe) {
         this.acercaDe = acercaDe;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 
     

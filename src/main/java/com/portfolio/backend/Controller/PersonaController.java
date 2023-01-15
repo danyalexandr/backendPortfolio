@@ -41,7 +41,7 @@ public class PersonaController {
             return new ResponseEntity(new Mensaje("ya xiste"), HttpStatus.BAD_REQUEST);
         
         Persona persona = new Persona(dtopersona.getNombre(), dtopersona.getApellido(),
-                                      dtopersona.getPuesto(), dtopersona.getAcercaDe());
+                                      dtopersona.getPuesto(), dtopersona.getAcercaDe(), dtopersona.getImg());
         personaservice.save(persona);
         return new ResponseEntity(new Mensaje("agregado"),HttpStatus.OK);
     }

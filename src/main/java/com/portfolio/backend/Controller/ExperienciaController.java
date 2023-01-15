@@ -50,7 +50,8 @@ public class ExperienciaController {
             return new ResponseEntity(new Mensaje("ya xiste"), HttpStatus.BAD_REQUEST);
         
         Experiencia experiencia = new Experiencia(dtoexp.getPuesto(), dtoexp.getEmpresa(),
-                                              dtoexp.getFechaInicio(), dtoexp.getFechaFin(), dtoexp.getLugar());
+                                              dtoexp.getFechaInicio(), dtoexp.getFechaFin(), dtoexp.getLugar(), 
+                                                    dtoexp.getImg());
         experienciaService.save(experiencia);
         return new ResponseEntity(new Mensaje("agregado"),HttpStatus.OK);
     }

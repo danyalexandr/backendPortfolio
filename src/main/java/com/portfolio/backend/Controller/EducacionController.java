@@ -50,7 +50,7 @@ public class EducacionController {
             return new ResponseEntity(new Mensaje("ya xiste"), HttpStatus.BAD_REQUEST);
         
         Educacion educacion = new Educacion(dtoedu.getInstitucion(), dtoedu.getCarrera(),
-                                            dtoedu.getFechaInicio(), dtoedu.getFechaFin());
+                                            dtoedu.getFechaInicio(), dtoedu.getFechaFin(), dtoedu.getImg());
         educacionservice.save(educacion);
         return new ResponseEntity(new Mensaje("agregado"),HttpStatus.OK);
     }

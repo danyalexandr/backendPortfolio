@@ -19,16 +19,18 @@ public class Educacion implements Serializable {
     private String carrera;
     private String fechaInicio;
     private String fechaFin;
+    private String img;
   
 
     public Educacion() {
     }
 
-    public Educacion(String institucion, String carrera, String fechaInicio, String fechaFin) {
+    public Educacion(String institucion, String carrera, String fechaInicio, String fechaFin, String img) {
         this.institucion = institucion;
         this.carrera = carrera;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
+        this.img = img;
     
     }
 
@@ -72,6 +74,14 @@ public class Educacion implements Serializable {
         this.fechaFin = fechaFin;
     }
 
-     
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
+    
 }
 

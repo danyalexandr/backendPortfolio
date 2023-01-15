@@ -1,6 +1,7 @@
 package com.portfolio.backend.Entity;
 
 import java.io.Serializable;
+import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,22 +15,25 @@ public class Experiencia implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     
+    @Basic
     private String puesto;
     private String empresa;
     private String fechaInicio;
     private String fechaFin;
     private String lugar;
+    private String img;
 
 
     public Experiencia() {
     }
 
-    public Experiencia(String puesto, String empresa, String fechaInicio, String fechaFin, String lugar) {
+    public Experiencia(String puesto, String empresa, String fechaInicio, String fechaFin, String lugar, String img) {
         this.puesto = puesto;
         this.empresa = empresa;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
         this.lugar = lugar;
+        this.img = img;
     }
 
     public int getId() {
@@ -80,4 +84,13 @@ public class Experiencia implements Serializable {
         this.lugar = lugar;
     }
 
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
+    
     }

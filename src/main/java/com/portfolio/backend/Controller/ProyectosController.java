@@ -48,7 +48,7 @@ public class ProyectosController {
         if(proyectosservice.existsByNombre(dtopro.getNombre()))
             return new ResponseEntity(new Mensaje("ya xiste"), HttpStatus.BAD_REQUEST);
         
-        Proyectos proyectos = new Proyectos(dtopro.getNombre(), dtopro.getDescripcion());
+        Proyectos proyectos = new Proyectos(dtopro.getNombre(), dtopro.getDescripcion(), dtopro.getImg());
         proyectosservice.save(proyectos);
         return new ResponseEntity(new Mensaje("agregado"),HttpStatus.OK);
     }

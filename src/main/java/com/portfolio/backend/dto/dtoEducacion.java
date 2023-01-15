@@ -13,15 +13,18 @@ public class dtoEducacion {
     @NotBlank
     private String fechaFin;
     
+    private String img;
+    
 
     public dtoEducacion() {
     }
 
-    public dtoEducacion(String institucion, String carrera, String fechaInicio, String fechaFin) {
+    public dtoEducacion(String institucion, String carrera, String fechaInicio, String fechaFin, String img) {
         this.institucion = institucion;
         this.carrera = carrera;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
+        this.img = img;
         
     }
 
@@ -57,5 +60,13 @@ public class dtoEducacion {
         this.fechaFin = fechaFin;
     }
 
-        
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
+      
 }

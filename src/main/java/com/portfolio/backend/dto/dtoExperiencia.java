@@ -13,17 +13,19 @@ public class dtoExperiencia {
     private String fechaFin;
     @NotBlank
     private String lugar;
-    @NotBlank
+    
+    private String img;
     
     public dtoExperiencia() {
     }
 
-    public dtoExperiencia(String puesto, String empresa, String fechaInicio, String fechaFin, String lugar) {
+    public dtoExperiencia(String puesto, String empresa, String fechaInicio, String fechaFin, String lugar, String img) {
         this.puesto = puesto;
         this.empresa = empresa;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
         this.lugar = lugar;
+        this.img = img;
     }
 
     public String getPuesto() {
@@ -66,5 +68,13 @@ public class dtoExperiencia {
         this.lugar = lugar;
     }
 
-       
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
+     
 }
