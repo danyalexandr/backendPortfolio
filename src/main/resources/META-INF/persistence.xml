@@ -3,10 +3,10 @@
   <persistence-unit name="com.portfolio_backend" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:37777/db_portfolio?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
-      <property name="javax.persistence.jdbc.user" value="root"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://uj8bh60m0rxnid3v:4xlUMG56wn7N9GtRjhoS@bfzdeqjrob6dhdala5pz-mysql.services.clever-cloud.com:3306/bfzdeqjrob6dhdala5pz?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
+      <property name="javax.persistence.jdbc.user" value="uj8bh60m0rxnid3v"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
-      <property name="javax.persistence.jdbc.password" value=""/>
+      <property name="javax.persistence.jdbc.password" value="4xlUMG56wn7N9GtRjhoS"/>
       <property name="javax.persistence.schema-generation.database.action" value="create"/>
     </properties>
   </persistence-unit>
