@@ -1,16 +1,14 @@
 package com.portfolio.backend.dto;
 
-import javax.validation.constraints.NotBlank;
-
 public class dtoEducacion {
     
-    @NotBlank
+    
     private String institucion;
-    @NotBlank
+    
     private String carrera;
-    @NotBlank
+    
     private String fechaInicio;
-    @NotBlank
+    
     private String fechaFin;
     
     private String img;

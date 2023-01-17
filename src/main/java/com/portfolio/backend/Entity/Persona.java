@@ -2,34 +2,37 @@ package com.portfolio.backend.Entity;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
+import javax.persistence.Table;
+
 
 
 @Entity
+@Table(name = "Persona")
 public class Persona implements Serializable {
  
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     
-    @NotNull
     @Basic
+    @Column
     private String nombre;
-    @NotNull
     @Basic
+    @Column
     private String apellido;
-    
     @Basic
+    @Column
     private String puesto;
-    
     @Basic
-    private String acercaDe; 
-    
+    @Column
+    private String acercaDe;
     @Basic
+    @Column
     private String img;
     
     public Persona() {

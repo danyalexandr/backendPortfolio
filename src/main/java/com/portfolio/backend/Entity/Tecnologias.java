@@ -2,12 +2,15 @@ package com.portfolio.backend.Entity;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "Tecnologias")
 public class Tecnologias implements Serializable {
     
     @Id
@@ -15,7 +18,10 @@ public class Tecnologias implements Serializable {
     private int id;
     
     @Basic
+    @Column
     private String habilidad;
+    @Basic
+    @Column
     private int porcentaje;
 
     public Tecnologias() {

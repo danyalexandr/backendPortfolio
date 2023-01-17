@@ -33,13 +33,13 @@ public class UsuarioController{
     }
     
     @DeleteMapping("/borrar/{id}")
-    public String deletePersona(@PathVariable Long id){
+    public String deletePersona(@PathVariable int id){
         usuarioservice.deleteUsuario(id);
         return "la persona se borro ok";
 }
 
     @GetMapping("/traer/perfil")
     public Usuario findUsuario(){
-        return usuarioservice.findUsuario((long)1);
+        return usuarioservice.findUsuario((int)1);
     }
 }

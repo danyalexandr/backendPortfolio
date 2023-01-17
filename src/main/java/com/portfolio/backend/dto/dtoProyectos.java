@@ -1,12 +1,9 @@
 package com.portfolio.backend.dto;
 
-import javax.validation.constraints.NotBlank;
-
 public class dtoProyectos {
     
-    @NotBlank
     private String nombre;
-    @NotBlank
+    
     private String descripcion;
     
     private String img;

@@ -11,12 +11,11 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "user")
-
 public class Usuario implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private int id;
     
     @Column
     private String username;
@@ -28,17 +27,17 @@ public class Usuario implements Serializable {
     public Usuario() {
     }
 
-    public Usuario(long id, String username, String password) {
+    public Usuario(int id, String username, String password) {
         this.id = id;
         this.username = username;
         this.password = password;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

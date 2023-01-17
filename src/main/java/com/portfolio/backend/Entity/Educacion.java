@@ -2,12 +2,15 @@ package com.portfolio.backend.Entity;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "Educacion")
 public class Educacion implements Serializable {
     
     @Id
@@ -15,10 +18,19 @@ public class Educacion implements Serializable {
     private int id;
     
     @Basic
+    @Column
     private String institucion;
+    @Basic
+    @Column
     private String carrera;
+    @Basic
+    @Column
     private String fechaInicio;
+    @Basic
+    @Column
     private String fechaFin;
+    @Basic
+    @Column
     private String img;
   
 

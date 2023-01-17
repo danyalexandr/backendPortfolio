@@ -12,20 +12,20 @@ public class UsuarioService{
     @Autowired IUsuarioRepository iusuariorepository;
 
     public List<Usuario> getUsuario() {
-        List<Usuario> usuario = iusuariorepository.findAll();
-        return usuario;
+        return iusuariorepository.findAll();
     }
 
     public void saveUsuario(Usuario usuario) {
         iusuariorepository.save(usuario);
     }
 
-    public void deleteUsuario(Long id) {
+    public void deleteUsuario(int id) {
        iusuariorepository.deleteById(id);
     }
 
-    public Usuario findUsuario(Long id) {
-        Usuario usuario = iusuariorepository.findById(id).orElse(null);
+    public Usuario findUsuario(int id) {
+        Usuario usuario;
+	    usuario = iusuariorepository.findById(id).orElse(null);
         return usuario;
     }
 }

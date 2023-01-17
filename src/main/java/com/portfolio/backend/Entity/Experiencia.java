@@ -2,13 +2,16 @@ package com.portfolio.backend.Entity;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 
 @Entity
+@Table(name = "Experiencia")
 public class Experiencia implements Serializable {
     
     @Id
@@ -16,11 +19,22 @@ public class Experiencia implements Serializable {
     private int id;
     
     @Basic
+    @Column
     private String puesto;
+    @Basic
+    @Column
     private String empresa;
+    @Basic
+    @Column
     private String fechaInicio;
+    @Basic
+    @Column
     private String fechaFin;
+    @Basic
+    @Column
     private String lugar;
+    @Basic
+    @Column
     private String img;
 
 

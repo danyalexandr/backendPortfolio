@@ -7,91 +7,79 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.apache.commons.lang3.StringUtils;
+import static org.springframework.http.RequestEntity.method;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/persona")
+@RequestMapping(path = "/persona")
 @CrossOrigin(origins = "https://portfoliofrontend-danyalexandr.web.app")
 public class PersonaController {
     @Autowired PersonaService personaservice;
     
-    @GetMapping("/lista")
+    @RequestMapping(value = "/lista", method = RequestMethod.GET)
     public ResponseEntity<List<Persona>> List(){
         
         List<Persona> list = personaservice.List();
         return new ResponseEntity(list, HttpStatus.OK);
     }
     
-    @PostMapping("/crear")
+    @RequestMapping(value = "/crear", method = RequestMethod.POST)
     public ResponseEntity<?> create(@RequestBody dtoPersona dtopersona){
         if(StringUtils.isBlank(dtopersona.getNombre())){
-            return new ResponseEntity(new Mensaje("obligatorio"),HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(new Exception("obligatorio"),HttpStatus.BAD_REQUEST);
         }
         if(personaservice.existsByNombre(dtopersona.getNombre()))
-            return new ResponseEntity(new Mensaje("ya xiste"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(new Exception("ya xiste"), HttpStatus.BAD_REQUEST);
         
         Persona persona = new Persona(dtopersona.getNombre(), dtopersona.getApellido(),
                                       dtopersona.getPuesto(), dtopersona.getAcercaDe(), dtopersona.getImg());
         personaservice.save(persona);
-        return new ResponseEntity(new Mensaje("agregado"),HttpStatus.OK);
+        return new ResponseEntity(new Exception("agregado"),HttpStatus.OK);
     }
     
-    @DeleteMapping("/borrar/{id}")
+    @RequestMapping(value = "/borrar/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<?> delete(@PathVariable("id") int id){
             
            if(!personaservice.existsById(id))
-                return new ResponseEntity(new Mensaje("no existe"), HttpStatus.BAD_REQUEST);
+                return new ResponseEntity(new Exception("no existe"), HttpStatus.BAD_REQUEST);
             
             personaservice.delete(id);
-            return new ResponseEntity(new Mensaje("eliminado"), HttpStatus.OK);
+            return new ResponseEntity(new Exception("eliminado"), HttpStatus.OK);
         }
     
-    @PutMapping("/update/{id}")
+    @RequestMapping(value = "/update", method = RequestMethod.PUT)
     public ResponseEntity<?> update(@PathVariable("id") int id, @RequestBody dtoPersona dtopersona){
         
         if(!personaservice.existsById(id))
-         return new ResponseEntity(new Mensaje("no existe id"),HttpStatus.BAD_REQUEST);        
+         return new ResponseEntity(new Exception("no existe id"),HttpStatus.BAD_REQUEST);        
         
-        if(personaservice.existsByNombre(dtopersona.getNombre()) && personaservice.getByNombre(dtopersona.getNombre()).get().getId() != id)
-            return new ResponseEntity(new Mensaje("ya existe"), HttpStatus.BAD_REQUEST);
+        if(personaservice.existsByNombre(dtopersona.getNombre()) && personaservice.getByNombre(dtopersona                                         .getNombre()).get().getId() != id)
+            return new ResponseEntity(new Exception("ya existe"), HttpStatus.BAD_REQUEST);
         
         if(StringUtils.isBlank(dtopersona.getNombre()))
-            return new ResponseEntity(new Mensaje("obligatorio"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(new Exception("obligatorio"), HttpStatus.BAD_REQUEST);
         
         Persona persona = personaservice.getOne(id).get();
         persona.setAcercaDe(dtopersona.getAcercaDe());
          
         personaservice.save(persona);
-        return new ResponseEntity(new Mensaje("actualizado"), HttpStatus.OK);
+        return new ResponseEntity(new Exception("actualizado"), HttpStatus.OK);
         }
     
-    @GetMapping("/detail/{id}")
+    @RequestMapping(value = "/detail/{id}", method = RequestMethod.GET)
     public ResponseEntity<Persona> getById(@PathVariable("id") int id){
         if(!personaservice.existsById(id))
-            return new ResponseEntity(new Mensaje("no existe"), HttpStatus.NOT_FOUND);
+            return new ResponseEntity(new Exception("no existe"), HttpStatus.NOT_FOUND);
         Persona proyectos = personaservice.getOne(id).get();
         return new ResponseEntity(proyectos, HttpStatus.OK);
     }
     
-    /*
-    @GetMapping("/traer/{id}")
-    public Persona findPersona(){
-        return ipersonaservice.findPersona((long)1);
-    }*/
-    
-    private static class Mensaje {
-
-        public Mensaje(String agregado) {
-        }
-    }
-}
+  }
