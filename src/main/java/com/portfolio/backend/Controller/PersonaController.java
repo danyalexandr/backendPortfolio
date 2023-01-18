@@ -66,7 +66,11 @@ public class PersonaController {
             return new ResponseEntity(new Exception("obligatorio"), HttpStatus.BAD_REQUEST);
         
         Persona persona = personaservice.getOne(id).get();
-        persona.setAcercaDe(dtopersona.getAcercaDe());
+	persona.setNombre(dtopersona.getNombre());
+	persona.setApellido(dtopersona.getApellido());
+	persona.setPuesto(dtopersona.getPuesto());
+	persona.setAcercaDe(dtopersona.getAcercaDe());
+	persona.setImg(dtopersona.getImg());
          
         personaservice.save(persona);
         return new ResponseEntity(new Exception("actualizado"), HttpStatus.OK);
