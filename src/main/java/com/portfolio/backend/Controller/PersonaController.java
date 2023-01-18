@@ -53,7 +53,7 @@ public class PersonaController {
             return new ResponseEntity(new Exception("eliminado"), HttpStatus.OK);
         }
     
-    @RequestMapping(value = "/update", method = RequestMethod.PUT)
+    @RequestMapping(value = "/update/{id}", method = RequestMethod.PUT)
     public ResponseEntity<?> update(@PathVariable("id") int id, @RequestBody dtoPersona dtopersona){
         
         if(!personaservice.existsById(id))
