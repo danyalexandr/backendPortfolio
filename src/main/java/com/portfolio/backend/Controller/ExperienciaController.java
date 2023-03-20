@@ -20,21 +20,21 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping("/exp")
+@RequestMapping("/api")
 @CrossOrigin(origins = "https://portfoliofrontend-danyalexandr.web.app")
 public class ExperienciaController {
     
     @Autowired 
     ExperienciaService experienciaService;
     
-    @GetMapping("/lista")
+    @GetMapping("/exp/lista")
     public ResponseEntity<List<Experiencia>> List(){
         
         List<Experiencia> list = experienciaService.List();
         return new ResponseEntity(list, HttpStatus.OK);
     }
     
-    @GetMapping("/detail/{id}")
+    @GetMapping("/exp/detail/{id}")
     public ResponseEntity<Experiencia> getById(@PathVariable("id") int id){
         if(!experienciaService.existsById(id))
             return new ResponseEntity(new Mensaje("no existe"), HttpStatus.NOT_FOUND);
@@ -42,7 +42,7 @@ public class ExperienciaController {
         return new ResponseEntity(experiencia, HttpStatus.OK);
     }
     
-    @PostMapping("/crear")
+    @PostMapping("/exp/crear")
     public ResponseEntity<?> create(@RequestBody dtoExperiencia dtoexp){
         if(StringUtils.isBlank(dtoexp.getPuesto())){
             return new ResponseEntity(new Mensaje("obligatorio"),HttpStatus.BAD_REQUEST);
@@ -57,7 +57,7 @@ public class ExperienciaController {
         return new ResponseEntity(new Mensaje("agregado"),HttpStatus.OK);
     }
     
-    @PutMapping("/update/{id}")
+    @PutMapping("/exp/update/{id}")
     public ResponseEntity<?> update(@PathVariable("id") int id, @RequestBody dtoExperiencia dtoexp){
         
         if(!experienciaService.existsById(id))
@@ -80,7 +80,7 @@ public class ExperienciaController {
         return new ResponseEntity(new Mensaje("actualizado"), HttpStatus.OK);
         }
 
-        @DeleteMapping("/borrar/{id}")
+        @DeleteMapping("/exp/borrar/{id}")
         public ResponseEntity<?> delete(@PathVariable("id") int id){
             
            if(!experienciaService.existsById(id))

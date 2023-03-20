@@ -20,21 +20,21 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping("/educacion")
+@RequestMapping("/api")
 @CrossOrigin(origins = "https://portfoliofrontend-danyalexandr.web.app")
 public class EducacionController {
     
     @Autowired 
     EducacionService educacionservice;
     
-    @GetMapping("/lista")
+    @GetMapping("/educacion/lista")
     public ResponseEntity<List<Educacion>> List(){
         
         List<Educacion> list = educacionservice.List();
         return new ResponseEntity(list, HttpStatus.OK);
     }
     
-    @GetMapping("/detail/{id}")
+    @GetMapping("/educacion/detail/{id}")
     public ResponseEntity<Educacion> getById(@PathVariable("id") int id){
         if(!educacionservice.existsById(id))
             return new ResponseEntity(new Mensaje("no existe"), HttpStatus.NOT_FOUND);
@@ -42,7 +42,7 @@ public class EducacionController {
         return new ResponseEntity(educacion, HttpStatus.OK);
     }
     
-    @PostMapping("/crear")
+    @PostMapping("/educacion/crear")
     public ResponseEntity<?> create(@RequestBody dtoEducacion dtoedu){
         if(StringUtils.isBlank(dtoedu.getInstitucion())){
             return new ResponseEntity(new Mensaje("obligatorio"),HttpStatus.BAD_REQUEST);
@@ -56,7 +56,7 @@ public class EducacionController {
         return new ResponseEntity(new Mensaje("agregado"),HttpStatus.OK);
     }
     
-    @PutMapping("/update/{id}")
+    @PutMapping("/educacion/update/{id}")
     public ResponseEntity<?> update(@PathVariable("id") int id, @RequestBody dtoEducacion dtoedu){
         
         if(!educacionservice.existsById(id))
@@ -79,7 +79,7 @@ public class EducacionController {
         return new ResponseEntity(new Mensaje("actualizado"), HttpStatus.OK);
         }
     
-    @DeleteMapping("/borrar/{id}")
+    @DeleteMapping("/educacion/borrar/{id}")
         public ResponseEntity<?> delete(@PathVariable("id") int id){
             
            if(!educacionservice.existsById(id))

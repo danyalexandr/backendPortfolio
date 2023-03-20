@@ -15,31 +15,31 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api")
 @CrossOrigin("https://portfoliofrontend-danyalexandr.web.app")
 public class UsuarioController{
     
     @Autowired UsuarioService usuarioservice;
     
            
-	 @GetMapping("/traer")
+	 @GetMapping("/user/traer")
     public List<Usuario> getUsuario(){
         return usuarioservice.getUsuario();
     }
     
-    @PostMapping("/crear")
+    @PostMapping("/user/crear")
     public String createPresona(@RequestBody Usuario usuario){
         usuarioservice.saveUsuario(usuario);
         return "la persona fue creada";
     }
     
-    @DeleteMapping("/borrar/{id}")
+    @DeleteMapping("/user/borrar/{id}")
     public String deletePersona(@PathVariable int id){
         usuarioservice.deleteUsuario(id);
         return "la persona se borro ok";
 }
 
-    @GetMapping("/traer/perfil")
+    @GetMapping("/user/traer/perfil")
     public Usuario findUsuario(){
         return usuarioservice.findUsuario((int)1);
     }

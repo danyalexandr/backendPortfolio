@@ -17,19 +17,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping(path = "/persona")
+@RequestMapping(path = "/api")
 @CrossOrigin(origins = "https://portfoliofrontend-danyalexandr.web.app")
 public class PersonaController {
     @Autowired PersonaService personaservice;
     
-    @RequestMapping(value = "/lista", method = RequestMethod.GET)
+    @RequestMapping(value = "/persona/lista", method = RequestMethod.GET)
     public ResponseEntity<List<Persona>> List(){
         
         List<Persona> list = personaservice.List();
         return new ResponseEntity(list, HttpStatus.OK);
     }
     
-    @RequestMapping(value = "/crear", method = RequestMethod.POST)
+    @RequestMapping(value = "/persona/crear", method = RequestMethod.POST)
     public ResponseEntity<?> create(@RequestBody dtoPersona dtopersona){
         if(StringUtils.isBlank(dtopersona.getNombre())){
             return new ResponseEntity(new Exception("obligatorio"),HttpStatus.BAD_REQUEST);
@@ -43,7 +43,7 @@ public class PersonaController {
         return new ResponseEntity(new Exception("agregado"),HttpStatus.OK);
     }
     
-    @RequestMapping(value = "/borrar/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/persona/borrar/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<?> delete(@PathVariable("id") int id){
             
            if(!personaservice.existsById(id))
@@ -53,7 +53,7 @@ public class PersonaController {
             return new ResponseEntity(new Exception("eliminado"), HttpStatus.OK);
         }
     
-    @RequestMapping(value = "/update/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/persona/update/{id}", method = RequestMethod.PUT)
     public ResponseEntity<?> update(@PathVariable("id") int id, @RequestBody dtoPersona dtopersona){
         
         if(!personaservice.existsById(id))
@@ -76,7 +76,7 @@ public class PersonaController {
         return new ResponseEntity(new Exception("actualizado"), HttpStatus.OK);
         }
     
-    @RequestMapping(value = "/detail/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/persona/detail/{id}", method = RequestMethod.GET)
     public ResponseEntity<Persona> getById(@PathVariable("id") int id){
         if(!personaservice.existsById(id))
             return new ResponseEntity(new Exception("no existe"), HttpStatus.NOT_FOUND);

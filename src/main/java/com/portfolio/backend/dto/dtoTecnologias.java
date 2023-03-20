@@ -5,9 +5,9 @@ import javax.validation.constraints.NotBlank;
 
 public class dtoTecnologias {
     
-    @NotBlank
+    
     private String habilidad;
-    @NotBlank
+    
     private int porcentaje;
 
     public dtoTecnologias() {

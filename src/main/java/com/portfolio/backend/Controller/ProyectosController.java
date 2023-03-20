@@ -21,20 +21,20 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping("/proyecto")
+@RequestMapping("/api")
 @CrossOrigin(origins = "https://portfoliofrontend-danyalexandr.web.app")
 public class ProyectosController {
     
     @Autowired ProyectosService proyectosservice;
     
-    @GetMapping("/lista")
+    @GetMapping("/proyecto/lista")
     public ResponseEntity<List<Proyectos>> List(){
         
         List<Proyectos> list = proyectosservice.List();
         return new ResponseEntity(list, HttpStatus.OK);
     }
     
-    @GetMapping("/detail/{id}")
+    @GetMapping("/proyecto/detail/{id}")
     public ResponseEntity<Proyectos> getById(@PathVariable("id") int id){
         if(!proyectosservice.existsById(id))
             return new ResponseEntity(new Mensaje("no existe"), HttpStatus.NOT_FOUND);
@@ -42,7 +42,7 @@ public class ProyectosController {
         return new ResponseEntity(proyectos, HttpStatus.OK);
     }
     
-    @PostMapping("/crear")
+    @PostMapping("/proyecto/crear")
     public ResponseEntity<?> create(@RequestBody dtoProyectos dtopro){
         if(StringUtils.isBlank(dtopro.getNombre())){
             return new ResponseEntity(new Mensaje("obligatorio"),HttpStatus.BAD_REQUEST);
@@ -55,7 +55,7 @@ public class ProyectosController {
         return new ResponseEntity(new Mensaje("agregado"),HttpStatus.OK);
     }
     
-    @PutMapping("/update/{id}")
+    @PutMapping("/proyecto/update/{id}")
     public ResponseEntity<?> update(@PathVariable("id") int id, @RequestBody dtoProyectos dtopro){
         
         if(!proyectosservice.existsById(id))
@@ -75,7 +75,7 @@ public class ProyectosController {
         return new ResponseEntity(new Mensaje("actualizado"), HttpStatus.OK);
         }
     
-    @DeleteMapping("/borrar/{id}")
+    @DeleteMapping("/proyecto/borrar/{id}")
         public ResponseEntity<?> delete(@PathVariable("id") int id){
             
            if(!proyectosservice.existsById(id))

@@ -34,66 +34,63 @@ public class Persona implements Serializable {
     @Basic
     @Column
     private String img;
-    
-    public Persona() {
-    }
-     
-       
-    public Persona(String nombre, String apellido, String puesto, String acercaDe, String img) {
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.puesto = puesto;
-        this.acercaDe = acercaDe; 
-        this.img = img;
-    }
 
-    public int getId() {
-        return id;
-    }
+	public Persona() {
+	}
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	public Persona(String nombre, String apellido, String puesto, String acercaDe, String img) {
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.puesto = puesto;
+		this.acercaDe = acercaDe;
+		this.img = img;
+	}
 
-    public String getNombre() {
-        return nombre;
-    }
+	public int getId() {
+		return id;
+	}
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public String getApellido() {
-        return apellido;
-    }
+	public String getNombre() {
+		return nombre;
+	}
 
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
-    }
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
 
-    public String getPuesto() {
-        return puesto;
-    }
+	public String getApellido() {
+		return apellido;
+	}
 
-    public void setPuesto(String puesto) {
-        this.puesto = puesto;
-    }
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
+	}
 
-    public String getAcercaDe() {
-        return acercaDe;
-    }
+	public String getPuesto() {
+		return puesto;
+	}
 
-    public void setAcercaDe(String acercaDe) {
-        this.acercaDe = acercaDe;
-    }
+	public void setPuesto(String puesto) {
+		this.puesto = puesto;
+	}
 
-    public String getImg() {
-        return img;
-    }
+	public String getAcercaDe() {
+		return acercaDe;
+	}
 
-    public void setImg(String img) {
-        this.img = img;
-    }
+	public void setAcercaDe(String acercaDe) {
+		this.acercaDe = acercaDe;
+	}
 
-    
+	public String getImg() {
+		return img;
+	}
+
+	public void setImg(String img) {
+		this.img = img;
+	}   
  } 
