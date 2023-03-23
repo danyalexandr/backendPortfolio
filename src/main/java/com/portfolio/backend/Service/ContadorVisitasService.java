@@ -9,7 +9,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class ContadorVisitasService {
 	
-	@Autowired ContadorVisitasRepository contadorvisitasrepository;
+	@Autowired 
+	ContadorVisitasRepository contadorvisitasrepository;
 	
 	 public int obtenerVisitas() {
         Contador_visitas contador = contadorvisitasrepository.findById(1L).orElse(new Contador_visitas());
