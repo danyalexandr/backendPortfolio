@@ -32,42 +32,42 @@ public class EducacionController {
     public ResponseEntity<List<Educacion>> List(){
         
         List<Educacion> list = educacionservice.List();
-        return new ResponseEntity(list, HttpStatus.OK);
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
     
     @GetMapping("/educacion/detail/{id}")
     public ResponseEntity<Educacion> getById(@PathVariable("id") int id){
         if(!educacionservice.existsById(id))
-            return new ResponseEntity(new Mensaje("no existe"), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         Educacion educacion = educacionservice.getOne(id).get();
-        return new ResponseEntity(educacion, HttpStatus.OK);
+        return new ResponseEntity<>(educacion, HttpStatus.OK);
     }
     
     @PostMapping(value = "/educacion/crear", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> create(@RequestBody dtoEducacion dtoedu){
         if(StringUtils.isBlank(dtoedu.getInstitucion())){
-            return new ResponseEntity(new Mensaje("obligatorio"),HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         if(educacionservice.existsByInstitucion(dtoedu.getInstitucion()))
-            return new ResponseEntity(new Mensaje("ya xiste"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         
         Educacion educacion = new Educacion(dtoedu.getInstitucion(), dtoedu.getCarrera(),
                                             dtoedu.getFechaInicio(), dtoedu.getFechaFin(), dtoedu.getImg());
         educacionservice.save(educacion);
-        return new ResponseEntity(new Mensaje("agregado"),HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
     
     @PutMapping(value = "/educacion/update/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> update(@PathVariable("id") int id, @RequestBody dtoEducacion dtoedu){
         
         if(!educacionservice.existsById(id))
-         return new ResponseEntity(new Mensaje("no existe id"),HttpStatus.BAD_REQUEST);        
+         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);        
         
         if(educacionservice.existsByInstitucion(dtoedu.getInstitucion()) && educacionservice.getByInstitucion(dtoedu.getInstitucion()).get().getId() != id)
-            return new ResponseEntity(new Mensaje("ya existe"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         
         if(StringUtils.isBlank(dtoedu.getInstitucion()))
-            return new ResponseEntity(new Mensaje("obligatorio"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         
         Educacion educacion = educacionservice.getOne(id).get();
         educacion.setInstitucion(dtoedu.getInstitucion());
@@ -77,17 +77,17 @@ public class EducacionController {
         
         
         educacionservice.save(educacion);
-        return new ResponseEntity(new Mensaje("actualizado"), HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
         }
     
     @DeleteMapping(value = "/educacion/borrar/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
         public ResponseEntity<?> delete(@PathVariable("id") int id){
             
            if(!educacionservice.existsById(id))
-                return new ResponseEntity(new Mensaje("no existe"), HttpStatus.BAD_REQUEST);
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
             
             educacionservice.delete(id);
-            return new ResponseEntity(new Mensaje("eliminado"), HttpStatus.OK);
+            return new ResponseEntity<>(HttpStatus.OK);
         }
     
     private static class Mensaje {
