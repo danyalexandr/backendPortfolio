@@ -7,6 +7,7 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -42,7 +43,7 @@ public class EducacionController {
         return new ResponseEntity(educacion, HttpStatus.OK);
     }
     
-    @PostMapping("/educacion/crear")
+    @PostMapping(value = "/educacion/crear", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> create(@RequestBody dtoEducacion dtoedu){
         if(StringUtils.isBlank(dtoedu.getInstitucion())){
             return new ResponseEntity(new Mensaje("obligatorio"),HttpStatus.BAD_REQUEST);
@@ -56,7 +57,7 @@ public class EducacionController {
         return new ResponseEntity(new Mensaje("agregado"),HttpStatus.OK);
     }
     
-    @PutMapping("/educacion/update/{id}")
+    @PutMapping(value = "/educacion/update/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> update(@PathVariable("id") int id, @RequestBody dtoEducacion dtoedu){
         
         if(!educacionservice.existsById(id))
@@ -79,7 +80,7 @@ public class EducacionController {
         return new ResponseEntity(new Mensaje("actualizado"), HttpStatus.OK);
         }
     
-    @DeleteMapping("/educacion/borrar/{id}")
+    @DeleteMapping(value = "/educacion/borrar/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
         public ResponseEntity<?> delete(@PathVariable("id") int id){
             
            if(!educacionservice.existsById(id))
