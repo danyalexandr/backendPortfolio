@@ -26,44 +26,44 @@ public class PersonaController {
     public ResponseEntity<List<Persona>> List(){
         
         List<Persona> list = personaservice.List();
-        return new ResponseEntity(list, HttpStatus.OK);
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
     
     @RequestMapping(value = "/persona/crear", method = RequestMethod.POST)
     public ResponseEntity<?> create(@RequestBody dtoPersona dtopersona){
         if(StringUtils.isBlank(dtopersona.getNombre())){
-            return new ResponseEntity(new Exception("obligatorio"),HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         if(personaservice.existsByNombre(dtopersona.getNombre()))
-            return new ResponseEntity(new Exception("ya xiste"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         
         Persona persona = new Persona(dtopersona.getNombre(), dtopersona.getApellido(),
                                       dtopersona.getPuesto(), dtopersona.getAcercaDe(), dtopersona.getImg());
         personaservice.save(persona);
-        return new ResponseEntity(new Exception("agregado"),HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
     
     @RequestMapping(value = "/persona/borrar/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<?> delete(@PathVariable("id") int id){
             
            if(!personaservice.existsById(id))
-                return new ResponseEntity(new Exception("no existe"), HttpStatus.BAD_REQUEST);
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
             
             personaservice.delete(id);
-            return new ResponseEntity(new Exception("eliminado"), HttpStatus.OK);
+            return new ResponseEntity<>(HttpStatus.OK);
         }
     
     @RequestMapping(value = "/persona/update/{id}", method = RequestMethod.PUT)
     public ResponseEntity<?> update(@PathVariable("id") int id, @RequestBody dtoPersona dtopersona){
         
         if(!personaservice.existsById(id))
-         return new ResponseEntity(new Exception("no existe id"),HttpStatus.BAD_REQUEST);        
+         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);        
         
         if(personaservice.existsByNombre(dtopersona.getNombre()) && personaservice.getByNombre(dtopersona                                         .getNombre()).get().getId() != id)
-            return new ResponseEntity(new Exception("ya existe"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         
         if(StringUtils.isBlank(dtopersona.getNombre()))
-            return new ResponseEntity(new Exception("obligatorio"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         
         Persona persona = personaservice.getOne(id).get();
 	persona.setNombre(dtopersona.getNombre());
@@ -73,15 +73,15 @@ public class PersonaController {
 	persona.setImg(dtopersona.getImg());
          
         personaservice.save(persona);
-        return new ResponseEntity(new Exception("actualizado"), HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
         }
     
     @RequestMapping(value = "/persona/detail/{id}", method = RequestMethod.GET)
     public ResponseEntity<Persona> getById(@PathVariable("id") int id){
         if(!personaservice.existsById(id))
-            return new ResponseEntity(new Exception("no existe"), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         Persona proyectos = personaservice.getOne(id).get();
-        return new ResponseEntity(proyectos, HttpStatus.OK);
+        return new ResponseEntity<>(proyectos, HttpStatus.OK);
     }
     
   }

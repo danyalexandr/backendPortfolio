@@ -89,10 +89,5 @@ public class EducacionController {
             educacionservice.delete(id);
             return new ResponseEntity<>(HttpStatus.OK);
         }
-    
-    private static class Mensaje {
-
-        public Mensaje(String obligatorio) {
-        }
-    }
 }
+

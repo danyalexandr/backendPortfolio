@@ -31,63 +31,57 @@ public class TecnologiasController {
     public ResponseEntity<List<Tecnologias>> List(){
         
         List<Tecnologias> list = tecnologiasservice.List();
-        return new ResponseEntity(list, HttpStatus.OK);
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
     
     @GetMapping("/tecno/detail/{id}")
     public ResponseEntity<Tecnologias> getById(@PathVariable("id") int id){
         if(!tecnologiasservice.existsById(id))
-            return new ResponseEntity(new Mensaje("no existe"), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         Tecnologias tecnologias = tecnologiasservice.getOne(id).get();
-        return new ResponseEntity(tecnologias, HttpStatus.OK);
+        return new ResponseEntity<>(tecnologias, HttpStatus.OK);
     }
     
     @PostMapping("/tecno/crear")
     public ResponseEntity<?> create(@RequestBody dtoTecnologias dtotecno){
         if(StringUtils.isBlank(dtotecno.getHabilidad())){
-            return new ResponseEntity(new Mensaje("obligatorio"),HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         if(tecnologiasservice.existsByHabilidad(dtotecno.getHabilidad()))
-            return new ResponseEntity(new Mensaje("ya xiste"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         
         Tecnologias tecnologias = new Tecnologias(dtotecno.getHabilidad(), dtotecno.getPorcentaje());
         tecnologiasservice.save(tecnologias);
-        return new ResponseEntity(new Mensaje("agregado"),HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
     
     @PutMapping("/tecno/update/{id}")
     public ResponseEntity<?> update(@PathVariable("id") int id, @RequestBody dtoTecnologias dtotecno){
         
         if(!tecnologiasservice.existsById(id))
-         return new ResponseEntity(new Mensaje("no existe id"),HttpStatus.BAD_REQUEST);        
+         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);        
         
         if(tecnologiasservice.existsByHabilidad(dtotecno.getHabilidad()) && tecnologiasservice.getByHabilidad(dtotecno.getHabilidad()).get().getId() != id)
-            return new ResponseEntity(new Mensaje("ya existe"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         
         if(StringUtils.isBlank(dtotecno.getHabilidad()))
-            return new ResponseEntity(new Mensaje("obligatorio"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         
         Tecnologias tecnologias = tecnologiasservice.getOne(id).get();
         tecnologias.setHabilidad(dtotecno.getHabilidad());
         tecnologias.setPorcentaje(dtotecno.getPorcentaje());
         
         tecnologiasservice.save(tecnologias);
-        return new ResponseEntity(new Mensaje("actualizado"), HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
         }
     
     @DeleteMapping("/tecno/borrar/{id}")
         public ResponseEntity<?> delete(@PathVariable("id") int id){
             
            if(!tecnologiasservice.existsById(id))
-                return new ResponseEntity(new Mensaje("no existe"), HttpStatus.BAD_REQUEST);
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
             
             tecnologiasservice.delete(id);
-            return new ResponseEntity(new Mensaje("eliminado"), HttpStatus.OK);
+            return new ResponseEntity<>(HttpStatus.OK);
         }
-
-    private static class Mensaje {
-
-        public Mensaje(String agregado) {
-        }
-    }
 }

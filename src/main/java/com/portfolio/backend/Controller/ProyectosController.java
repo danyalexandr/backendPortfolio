@@ -31,65 +31,57 @@ public class ProyectosController {
     public ResponseEntity<List<Proyectos>> List(){
         
         List<Proyectos> list = proyectosservice.List();
-        return new ResponseEntity(list, HttpStatus.OK);
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
     
     @GetMapping("/proyecto/detail/{id}")
     public ResponseEntity<Proyectos> getById(@PathVariable("id") int id){
         if(!proyectosservice.existsById(id))
-            return new ResponseEntity(new Mensaje("no existe"), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         Proyectos proyectos = proyectosservice.getOne(id).get();
-        return new ResponseEntity(proyectos, HttpStatus.OK);
+        return new ResponseEntity<>(proyectos, HttpStatus.OK);
     }
     
     @PostMapping("/proyecto/crear")
     public ResponseEntity<?> create(@RequestBody dtoProyectos dtopro){
         if(StringUtils.isBlank(dtopro.getNombre())){
-            return new ResponseEntity(new Mensaje("obligatorio"),HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         if(proyectosservice.existsByNombre(dtopro.getNombre()))
-            return new ResponseEntity(new Mensaje("ya xiste"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         
         Proyectos proyectos = new Proyectos(dtopro.getNombre(), dtopro.getDescripcion(), dtopro.getImg());
         proyectosservice.save(proyectos);
-        return new ResponseEntity(new Mensaje("agregado"),HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
     
     @PutMapping("/proyecto/update/{id}")
     public ResponseEntity<?> update(@PathVariable("id") int id, @RequestBody dtoProyectos dtopro){
         
         if(!proyectosservice.existsById(id))
-         return new ResponseEntity(new Mensaje("no existe id"),HttpStatus.BAD_REQUEST);        
+         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);        
         
         if(proyectosservice.existsByNombre(dtopro.getNombre()) && proyectosservice.getByNombre(dtopro.getNombre()).get().getId() != id)
-            return new ResponseEntity(new Mensaje("ya existe"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         
         if(StringUtils.isBlank(dtopro.getNombre()))
-            return new ResponseEntity(new Mensaje("obligatorio"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         
         Proyectos proyectos = proyectosservice.getOne(id).get();
         proyectos.setNombre(dtopro.getNombre());
         proyectos.setDescripcion(dtopro.getDescripcion());      
         
         proyectosservice.save(proyectos);
-        return new ResponseEntity(new Mensaje("actualizado"), HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
         }
     
     @DeleteMapping("/proyecto/borrar/{id}")
         public ResponseEntity<?> delete(@PathVariable("id") int id){
             
            if(!proyectosservice.existsById(id))
-                return new ResponseEntity(new Mensaje("no existe"), HttpStatus.BAD_REQUEST);
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
             
             proyectosservice.delete(id);
-            return new ResponseEntity(new Mensaje("eliminado"), HttpStatus.OK);
-        }
-
-    private static class Mensaje {
-
-        public Mensaje(String agregado) {
-        }
-    }
-    
-    
+            return new ResponseEntity<>(HttpStatus.OK);
+        } 
 }
