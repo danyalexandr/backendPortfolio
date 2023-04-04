@@ -3,7 +3,9 @@ package com.portfolio.backend.Controller;
 import com.portfolio.backend.Entity.Usuario;
 import com.portfolio.backend.Repository.IUsuarioRepository;
 import com.portfolio.backend.Service.UsuarioService;
+import java.nio.charset.StandardCharsets;
 import java.util.Base64;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -51,7 +53,7 @@ public class UsuarioController{
         return usuarioservice.findUsuario((int)1);
     }
     
-    @PostMapping("/user/login")
+ @PostMapping("/user/login")
 public ResponseEntity<?> login(@RequestBody Map<String, String> credentials) {
     String username = credentials.get("username");
     String password = credentials.get("password");
@@ -59,10 +61,10 @@ public ResponseEntity<?> login(@RequestBody Map<String, String> credentials) {
     if (username != null && password != null) {
         Optional<Usuario> userOptional = iusuariorepository.findByUsername(username);
         if (userOptional.isPresent() && password.equals(userOptional.get().getPassword())) {
-            // Genera un token básico
-            String token = Base64.getEncoder().encodeToString((username + ":" + password).getBytes());
-            // Devuelve el token en la respuesta
-            return ResponseEntity.ok(token);
+            String token = Base64.getEncoder().encodeToString((username + ":" + password).getBytes(StandardCharsets.UTF_8));
+            Map<String, String> responseBody = new HashMap<>();
+            responseBody.put("token", token);
+            return ResponseEntity.ok(responseBody);
         }
     }
     return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Usuario o contraseña incorrecta");
